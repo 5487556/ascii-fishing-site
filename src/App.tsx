@@ -177,6 +177,12 @@ function chooseFish(): FishSpecies {
   return SPECIES[SPECIES.length - 1];
 }
 
+function getTargetScore(rarity: Rarity): number {
+  const [minimum, maximum] =
+    rarity === '常見' ? [16, 20] : rarity === '較稀有' ? [21, 25] : [26, 30];
+  return minimum + Math.floor(Math.random() * (maximum - minimum + 1));
+}
+
 function pickZone(position: number, zones: Zone[]) {
   return zones.find((zone) => position < zone.end) ?? zones[zones.length - 1];
 }
@@ -194,6 +200,7 @@ export default function App() {
     ...zone,
     end: ZONE_TYPES.slice(0, index + 1).reduce((sum, item) => sum + item.width, 0),
   })));
+  const [targetFish, setTargetFish] = useState<FishSpecies | null>(null);
   const [indicator, setIndicator] = useState(0);
   const [cycleDuration, setCycleDuration] = useState(1800);
   const [lastMove, setLastMove] = useState('拋竿後，按下按鈕停住指標。');
@@ -245,10 +252,12 @@ export default function App() {
   }, [phase, currentCatch, setRecords]);
 
   function castLine() {
+    const fish = chooseFish();
     initialDirection.current = Math.random() < 0.5 ? 1 : -1;
     startedAt.current = performance.now();
     setCycleDuration(1050 + Math.random() * 1450);
-    setTargetScore(12 + Math.floor(Math.random() * 9));
+    setTargetScore(getTargetScore(fish.rarity));
+    setTargetFish(fish);
     setZones(createZones());
     setScore(0);
     setIndicator(initialDirection.current === 1 ? 0 : 100);
@@ -264,7 +273,12 @@ export default function App() {
     setLastMove(`${zone.label}！${zone.score > 0 ? '+' : ''}${zone.score} 良度`);
     if (nextScore < targetScore) return;
 
-    const fish = chooseFish();
+    const fish = targetFish;
+    if (!fish) {
+      setLastMove('魚訊不明，請重新拋竿。');
+      setPhase('idle');
+      return;
+    }
     const sizeCm = Math.round((fish.minCm + Math.random() * (fish.maxCm - fish.minCm)) * 10) / 10;
     setCurrentCatch({ fish, sizeCm });
     setLastMove('魚兒上鉤了！正在收線……');
@@ -336,7 +350,6 @@ export default function App() {
             <span className="section-icon"><Fish size={19} /></span>
             <div>
               <h2 id="game-title">溪流挑戰</h2>
-              <p>綠色區域已收窄，隨機門檻為 {targetScore} 點良度。</p>
             </div>
           </div>
 
