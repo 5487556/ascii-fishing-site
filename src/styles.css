@@ -1,0 +1,241 @@
+:root {
+  font-family: 'Noto Sans TC', 'Microsoft JhengHei', sans-serif;
+  color: #dce8e1;
+  background: #0b1518;
+  color-scheme: dark;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  --ink: #dce8e1;
+  --muted: #a1b5ae;
+  --river: #72c4b0;
+  --river-dark: #081619;
+  --paper: #142327;
+  --coral: #ed916c;
+  --line: #2b4146;
+  --mono: 'Courier New', monospace;
+  --serif: 'Palatino Linotype', 'Book Antiqua', Georgia, serif;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; min-width: 320px; background: #0b1518; }
+button, a { font: inherit; touch-action: manipulation; }
+button { color: inherit; }
+a { color: inherit; }
+:focus-visible { outline: 3px solid #f3a277; outline-offset: 4px; }
+
+.page-shell { width: min(1120px, calc(100% - 64px)); margin: 0 auto; padding-bottom: 32px; }
+.topbar { height: 72px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid #d5dfd6; }
+.wordmark, .topbar-link { display: inline-flex; align-items: center; text-decoration: none; }
+.wordmark { gap: 10px; font-size: 15px; font-weight: 700; letter-spacing: .04em; }
+.wordmark-mark { width: 30px; height: 30px; display: grid; place-items: center; color: #f5f4e9; background: var(--river-dark); font: 500 14px var(--mono); border-radius: 50%; }
+.topbar-link { gap: 8px; color: #426d69; font-size: 13px; font-weight: 600; }
+.topbar-link:hover { color: var(--coral); }
+
+.hero { display: grid; grid-template-columns: .9fr 1.1fr; gap: 60px; align-items: center; padding: 48px 0 42px; }
+.hero-copy { padding-left: 12px; }
+.hero-kicker { display: inline-flex; align-items: center; gap: 8px; color: var(--river); font-size: 13px; font-weight: 700; }
+.hero h1 { margin: 14px 0 13px; font: 600 clamp(48px, 6vw, 72px)/.98 var(--serif); letter-spacing: -.055em; }
+.hero-copy > p { max-width: 380px; margin: 0; color: #5e7773; font-size: 15px; line-height: 1.8; }
+.hero-note { display: flex; align-items: center; gap: 12px; margin-top: 25px; color: #6f8680; font-size: 12px; }
+.note-line { width: 28px; height: 1px; background: var(--coral); }
+
+.river-scene { min-height: 263px; padding: 19px 24px 16px; overflow: hidden; color: #c9e6d9; background: var(--river-dark); border-radius: 5px 5px 5px 34px; position: relative; }
+.river-scene::before, .river-scene::after { content: ''; position: absolute; width: 220px; height: 220px; border: 1px solid rgba(195, 228, 213, .1); border-radius: 50%; pointer-events: none; }
+.river-scene::before { right: -80px; top: -133px; }
+.river-scene::after { right: -102px; top: -112px; width: 264px; height: 264px; }
+.scene-topline, .scene-live { display: flex; align-items: center; }
+.scene-topline { justify-content: space-between; color: #9abbb0; font-size: 11px; }
+.scene-live { gap: 7px; color: #c3ded3; }
+.scene-live > span { width: 6px; height: 6px; background: #efa77b; border-radius: 50%; }
+.scene-art { position: relative; z-index: 1; display: flex; align-items: center; justify-content: center; min-height: 156px; margin: 4px 0 0; color: #d6eee0; font: 14px/1.45 var(--mono); white-space: pre; }
+.scene-art--fishing { color: #e2f1e4; }
+.scene-art--reeling { color: #f2ad83; }
+.scene-art--caught { color: #d6eee0; }
+.scene-art--fishing.scene-frame--1 { transform: translateY(1px); }
+.scene-art--reeling.scene-frame--1 { transform: translateY(-2px); }
+.scene-caption { display: flex; align-items: center; gap: 10px; padding-top: 12px; border-top: 1px solid rgba(199, 230, 217, .16); color: #9abbb0; font-size: 11px; }
+.scene-fish-mark { color: #f2ad83; font: 11px var(--mono); }
+
+.game-panel { display: grid; grid-template-columns: minmax(0, 1fr) 270px; gap: 28px; padding: 26px 28px; background: var(--paper); border: 1px solid #e1e8df; border-radius: 6px; }
+.section-heading, .guide-title-group { display: flex; align-items: center; gap: 13px; }
+.section-icon, .guide-icon { width: 38px; height: 38px; display: grid; place-items: center; flex: 0 0 auto; color: #277e79; background: #e1eee5; border-radius: 50%; }
+.section-heading h2, .guide-title-group h2 { margin: 0; font-size: 17px; font-weight: 700; letter-spacing: .01em; }
+.section-heading p, .guide-title-group p { margin: 4px 0 0; color: var(--muted); font-size: 12px; }
+.meter-wrap { margin-top: 27px; }
+.meter-topline { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 10px; color: #66807b; font-size: 11px; }
+.score-readout strong { color: var(--ink); font: 500 23px var(--mono); }
+.score-readout small { color: #94a49c; font: 11px var(--mono); }
+.meter-track { height: 21px; display: flex; position: relative; overflow: visible; border-radius: 2px; }
+.meter-zone { display: block; height: 100%; }
+.zone--miss { background: #e99b86; }
+.zone--near { background: #f0d082; }
+.zone--hit { background: #6db29a; }
+.meter-marker { position: absolute; z-index: 2; top: -6px; width: 3px; height: 33px; background: #19383b; border: 1px solid #f7f7ef; box-shadow: 0 0 0 1px #19383b; transform: translateX(-50%); transition: left 24ms linear; }
+.meter-track--active .meter-marker { background: #19383b; }
+.meter-labels { display: flex; justify-content: space-between; gap: 10px; padding-top: 12px; }
+.zone-key { display: inline-flex; align-items: center; gap: 5px; color: #6b817b; font-size: 10px; white-space: nowrap; }
+.key-dot { width: 7px; height: 7px; display: inline-block; border-radius: 50%; }
+.key-dot--miss { background: #e99b86; }
+.key-dot--near { background: #e7bd60; }
+.key-dot--hit { background: #6db29a; }
+.action-row { display: flex; align-items: center; gap: 16px; margin-top: 20px; }
+.cast-button { min-width: 156px; min-height: 46px; display: inline-flex; align-items: center; justify-content: center; gap: 9px; padding: 0 20px; color: #fffaf0; background: var(--coral); border: 0; border-radius: 3px; cursor: pointer; font-size: 14px; font-weight: 700; transition: background .2s, transform .2s; }
+.cast-button:hover:not(:disabled) { background: #d96645; transform: translateY(-1px); }
+.cast-button:disabled { opacity: .68; cursor: wait; }
+.cast-button-glyph { font: 12px var(--mono); }
+.game-hint { margin: 0; color: #71847d; font-size: 12px; }
+
+.catch-card { min-height: 201px; padding: 17px 18px; background: #edf2e9; border-radius: 3px; }
+.catch-heading { display: flex; align-items: center; gap: 10px; color: #6a837b; font-size: 11px; }
+.catch-rule { height: 1px; flex: 1; background: #d4dfd5; }
+.catch-empty { min-height: 145px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
+.empty-fish { margin: 1px 0 8px; color: #a7bbb0; font: 19px var(--mono); }
+.catch-empty p { margin: 0; color: #48635e; font-size: 13px; font-weight: 600; }
+.catch-empty small { margin-top: 5px; color: #8b9b91; font-size: 10px; }
+.catch-result { display: grid; grid-template-columns: 1fr auto; align-items: center; padding-top: 11px; }
+.catch-fish-art { color: #317f76; font: 13px var(--mono); }
+.catch-result h3 { grid-column: 1; margin: 3px 0 0; font: 600 21px var(--serif); }
+.catch-result > p { grid-column: 1; margin: 3px 0 0; color: #73867c; font-size: 10px; }
+.catch-result > p span { padding: 0 3px; color: #a6b0a7; }
+.catch-size { grid-column: 2; grid-row: 1 / span 3; color: #235e58; font: 500 26px var(--mono); }
+.catch-size small { font-size: 11px; }
+.rarity-tag { grid-column: 1 / -1; justify-self: start; margin-top: 10px; padding: 3px 8px; border-radius: 2px; color: #5c7c64; background: #dfeadd; font-size: 10px; }
+.rarity-tag--較稀有 { color: #8e6e32; background: #f1e7c8; }
+.rarity-tag--稀有 { color: #8d5a50; background: #f3ddd2; }
+
+.field-guide { margin-top: 41px; }
+.guide-header { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding-bottom: 16px; border-bottom: 1px solid #d4ded5; }
+.guide-icon { width: 36px; height: 36px; }
+.guide-title-group h2 { font-size: 19px; }
+.guide-title-group p { margin-top: 5px; font-size: 11px; }
+.guide-tools { display: flex; align-items: center; gap: 22px; }
+.guide-progress { display: grid; grid-template-columns: auto 92px; align-items: center; column-gap: 11px; }
+.guide-progress > strong { color: #254c48; font: 500 16px var(--mono); }
+.guide-progress > strong span { color: #99a89e; font-size: 11px; }
+.guide-progress > small { grid-column: 1; color: #82948b; font-size: 10px; }
+.guide-progress-track { grid-column: 2; grid-row: 1 / span 2; height: 4px; overflow: hidden; background: #d5e0d6; border-radius: 5px; }
+.guide-progress-track i { width: var(--progress); height: 100%; display: block; background: var(--river); transition: width .3s ease; }
+.clear-button { min-height: 34px; display: inline-flex; align-items: center; gap: 6px; padding: 0 10px; color: #71847d; background: transparent; border: 1px solid #d6e0d7; border-radius: 3px; cursor: pointer; font-size: 11px; }
+.clear-button:hover:not(:disabled) { color: #b3533d; border-color: #d9a090; }
+.clear-button:disabled { opacity: .5; cursor: not-allowed; }
+.storage-note, .storage-message { margin: 12px 0; color: #8a9b91; font-size: 10px; }
+.storage-message { color: #a24737; }
+.fish-grid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 10px; }
+.fish-entry { min-height: 124px; position: relative; padding: 14px 12px 10px; overflow: hidden; background: rgba(247, 247, 239, .72); border: 1px solid #dfe7df; border-radius: 3px; }
+.fish-entry--found { background: #f6f7ee; border-color: #d4e0d6; }
+.fish-entry-number { position: absolute; top: 10px; right: 11px; color: #a3b0a6; font: 9px var(--mono); }
+.fish-entry-shape { height: 23px; display: block; color: #438e7e; font: 12px/23px var(--mono); }
+.fish-entry-shape--unknown { color: #bac8bd; }
+.fish-entry h3 { margin: 6px 0 3px; color: #385954; font-size: 13px; font-weight: 600; }
+.fish-entry--unknown h3 { color: #81958a; letter-spacing: .12em; }
+.fish-rarity { display: inline-block; padding: 2px 5px; color: #62846c; background: #e5eee2; border-radius: 2px; font-size: 9px; }
+.fish-rarity--較稀有 { color: #92733d; background: #f2ead3; }
+.fish-rarity--稀有 { color: #9b6456; background: #f2e3da; }
+.fish-entry-meta, .fish-entry-count { margin: 7px 0 0; color: #788e83; font: 9px var(--mono); }
+.fish-entry-count { margin-top: 3px; color: #a0ada2; }
+.fish-entry-meta--hidden { margin-top: 12px; color: #a4b1a6; }
+.page-footer { display: flex; justify-content: space-between; gap: 12px; margin-top: 24px; padding-top: 13px; color: #84968b; border-top: 1px solid #d7e0d6; font-size: 10px; }
+
+@media (max-width: 820px) {
+  .page-shell { width: min(100% - 40px, 650px); }
+  .hero { grid-template-columns: 1fr 1.15fr; gap: 25px; padding-top: 39px; }
+  .hero-copy { padding-left: 0; }
+  .hero h1 { font-size: clamp(47px, 8vw, 62px); }
+  .river-scene { min-height: 245px; padding-right: 17px; padding-left: 17px; }
+  .scene-art { font-size: 12px; }
+  .game-panel { grid-template-columns: minmax(0, 1fr) 230px; gap: 18px; padding: 22px; }
+  .fish-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}
+
+@media (max-width: 580px) {
+  .page-shell { width: calc(100% - 32px); }
+  .topbar { height: 60px; }
+  .hero { grid-template-columns: 1fr; gap: 24px; padding: 34px 0 24px; }
+  .hero h1 { margin-top: 11px; font-size: 56px; }
+  .hero-copy > p { max-width: 340px; font-size: 14px; }
+  .hero-note { margin-top: 17px; }
+  .river-scene { min-height: 226px; border-bottom-left-radius: 26px; }
+  .scene-art { min-height: 132px; font-size: clamp(11px, 3.2vw, 13px); }
+  .game-panel { grid-template-columns: 1fr; gap: 17px; padding: 19px 16px 16px; }
+  .section-heading p { max-width: 275px; line-height: 1.6; }
+  .meter-wrap { margin-top: 23px; }
+  .meter-labels { gap: 5px; }
+  .zone-key { gap: 4px; font-size: 9px; }
+  .action-row { align-items: flex-start; flex-direction: column; gap: 10px; margin-top: 17px; }
+  .cast-button { width: 100%; min-height: 48px; }
+  .game-hint { min-height: 17px; }
+  .catch-card { min-height: 152px; }
+  .catch-empty { min-height: 103px; }
+  .catch-result { max-width: 320px; margin: 0 auto; }
+  .field-guide { margin-top: 32px; }
+  .guide-header { align-items: flex-start; flex-direction: column; gap: 16px; }
+  .guide-tools { width: 100%; justify-content: space-between; }
+  .guide-progress { grid-template-columns: auto 72px; }
+  .fish-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+  .fish-entry { min-height: 120px; padding: 12px 10px 9px; }
+  .page-footer { flex-direction: column; gap: 6px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; }
+}
+
+.topbar { border-bottom-color: #263c41; }
+.topbar-link { color: #a4c9bd; }
+.hero-copy > p { color: #adc1b9; }
+.hero-note { color: #91aaa1; }
+.river-scene { color: #d4eee2; }
+.game-panel { border-color: #293e43; }
+.section-icon, .guide-icon { color: #8bd1bb; background: #1b3534; }
+.meter-topline { color: #a5b9b0; }
+.score-readout small { color: #a1b5ac; }
+.meter-marker { background: #f2f5e8; border-color: #142327; box-shadow: 0 0 0 1px #e6f0e2; }
+.meter-track--active .meter-marker { background: #f2f5e8; }
+.zone--miss { background: #d5796b; }
+.zone--near { background: #d5ad5c; }
+.zone--hit { background: #4a9e80; }
+.key-dot--near { background: #d5ad5c; }
+.key-dot--hit { background: #4a9e80; }
+.zone-key { color: #b2c3ba; }
+.cast-button { background: #d87856; }
+.cast-button:hover:not(:disabled) { background: #e68762; }
+.game-hint { color: #a4b8af; }
+.catch-card { background: #1a3030; }
+.catch-heading { color: #a8c0b5; }
+.catch-rule { background: #36504d; }
+.catch-empty p { color: #d5e5dc; }
+.catch-empty small { color: #a1b8ad; }
+.empty-fish { color: #97b6aa; }
+.catch-fish-art { color: #79c7af; }
+.catch-result h3 { color: #e0ede4; }
+.catch-result > p { color: #aec1b6; }
+.catch-result > p span { color: #879d92; }
+.catch-size { color: #9cddc6; }
+.rarity-tag { color: #b7d5a9; background: #294334; }
+.rarity-tag--較稀有 { color: #f1d58a; background: #443c29; }
+.rarity-tag--稀有 { color: #f3b49b; background: #49312d; }
+.guide-header { border-bottom-color: #2a4043; }
+.guide-progress > strong { color: #d4e5db; }
+.guide-progress > strong span { color: #a0b2a8; }
+.guide-progress > small { color: #a8b9af; }
+.guide-progress-track { background: #30464a; }
+.guide-progress-track i { background: #69bca5; }
+.clear-button { color: #aec0b7; border-color: #3a5052; }
+.clear-button:hover:not(:disabled) { color: #ffc0a5; border-color: #bd8069; }
+.storage-note { color: #a0b3a8; }
+.storage-message { color: #ffad93; }
+.fish-entry, .fish-entry--unknown { background: #142226; border-color: #2a3e42; }
+.fish-entry--found { background: #192a28; border-color: #345047; }
+.fish-entry-number { color: #91a69b; }
+.fish-entry-shape { color: #78c7ad; }
+.fish-entry-shape--unknown { color: #879c92; }
+.fish-entry h3 { color: #d1e4d8; }
+.fish-entry--unknown h3 { color: #9db1a7; }
+.fish-rarity { color: #b8d5b1; background: #2b4131; }
+.fish-rarity--較稀有 { color: #e9d08d; background: #453e2c; }
+.fish-rarity--稀有 { color: #efb6a1; background: #48332f; }
+.fish-entry-meta, .fish-entry-count { color: #a5b7ad; }
+.fish-entry-count { color: #91a69b; }
+.fish-entry-meta--hidden { color: #96aaa0; }
+.page-footer { color: #98ada2; border-top-color: #2a4043; }
